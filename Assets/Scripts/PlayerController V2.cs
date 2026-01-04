@@ -1,12 +1,10 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerControllerV2 : MonoBehaviour
 {
     public CharacterController con;
     private float currentspeed;
-    public float walkspeed = 4.5f;
-    public float runspeed = 8f;
+    public float speed = 5.8f;
     public float lookspeed = 4f;
     public float lookxlimit = 85f;
     public float gravity = 10f;
@@ -17,7 +15,7 @@ public class PlayerControllerV2 : MonoBehaviour
     public void Start()
     {
         con = GetComponent<CharacterController>();
-        currentspeed = walkspeed;       
+        currentspeed = speed;       
     }
     private void FixedUpdate()
     {
@@ -28,21 +26,6 @@ public class PlayerControllerV2 : MonoBehaviour
         move *= currentspeed;
         velocity.y -= gravity * Time.deltaTime;
         con.Move(velocity * Time.deltaTime); ;       
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            isrunning = true;
-            currentspeed = runspeed;
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            isrunning = false;
-            currentspeed = walkspeed;
-        }
-        else if (!Input.GetKey(KeyCode.LeftShift))
-        {
-            isrunning = false;
-            currentspeed = walkspeed;
-        }
     }
     private void LateUpdate()
     {
